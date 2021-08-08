@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TestingDemo</string>
+    <string name="no_data_message">There seems to be no data :(</string>
+    <string name="error_message">Something went wrong</string>
+</resources>
