@@ -19,24 +19,28 @@ class MainActivity : AppCompatActivity() {
         val retrofit = RetrofitProvider(getBaseUrl(), OkHttpProvider.getOkHttpClient()).getRetrofit()
         val githubApi = retrofit.create(GithubApi::class.java)
 
-        githubApi.testFetch().enqueue(object : Callback<GithubResponse> {
-            override fun onResponse(call: Call<GithubResponse>, response: Response<GithubResponse>) {
+        githubApi.testFetch().enqueue(object : Callback<List<GithubRepoResponse>> {
+            override fun onResponse(call: Call<List<GithubRepoResponse>>, response: Response<List<GithubRepoResponse>>) {
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()!!
-                    showSuccessDataState(result)
+                    if (result.isEmpty()) {
+                        showEmptyDataState()
+                    } else {
+                        showSuccessDataState(result)
+                    }
                 } else {
-                    showEmptyDataState()
+                    showErrorState()
                 }
             }
 
-            override fun onFailure(call: Call<GithubResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<GithubRepoResponse>>, t: Throwable) {
                 showErrorState()
             }
         })
 
     }
 
-    private fun showSuccessDataState(body: GithubResponse) {
+    private fun showSuccessDataState(body: List<GithubRepoResponse>) {
         binding.textviewSuccess.visibility = View.VISIBLE
         binding.textviewSuccess.text = body.toString()
         binding.progressBar.visibility = View.GONE
@@ -58,6 +62,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getBaseUrl(): String {
-        return (applicationContext as DemoApplication).getBaseUrl()
+        return (applicationContext as BaseUrlProvider).getBaseUrl()
     }
 }
