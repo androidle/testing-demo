@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.leevinapp.testingdemo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:name=".TestDemoApplication"
-        android:label="TestDemoApp"/>
+        android:name=".TestApplication"
+        android:label="TestDemoApp">
+    </application>
 </manifest>
