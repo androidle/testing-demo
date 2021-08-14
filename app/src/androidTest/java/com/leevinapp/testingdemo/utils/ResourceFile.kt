@@ -1,4 +1,4 @@
-package com.leevinapp.testingdemo
+package com.leevinapp.testingdemo.utils
 
 import java.nio.charset.Charset
 

@@ -47,4 +47,10 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="There seems to be no data" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/openMainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="openMainFragment"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
