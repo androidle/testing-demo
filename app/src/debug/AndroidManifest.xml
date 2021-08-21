@@ -2,10 +2,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.leevinapp.testingdemo">
 
-    <!-- screenshots needs   -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <application
-        android:name=".TestApplication"
-        android:label="TestDemoApp">
-    </application>
 </manifest>

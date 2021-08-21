@@ -14,11 +14,6 @@ import retrofit2.Response
 
 class MainFragment : Fragment() {
     private lateinit var binding: ActivityMainBinding
-    val countingIdlingResource = CountingIdlingResource("Main")
-
-    init {
-//        countingIdlingResource.increment()
-    }
 
     private val viewModel: MainViewModel by viewModels()
 

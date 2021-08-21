@@ -8,9 +8,12 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
+import com.leevinapp.testingdemo.utils.screenshot
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -63,6 +66,28 @@ class MainFragmentTest {
             .check(matches(isDisplayed()))
         Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
+
+
+        Screenshot.snapActivity(testActivityRule.activity)
+            .setName("Success_Page")
+            .record()
+    }
+
+    @Test
+    fun testLoadingBeforeResponseReturn() {
+        testActivityRule.activity.replaceFragment(fragment)
+
+        Espresso.onView(withId(R.id.progress_bar))
+            .check(matches(isDisplayed()))
+        Espresso.onView(withId(R.id.textviewSuccess))
+            .check(matches(not(isDisplayed())))
+        Espresso.onView(withId(R.id.textview))
+            .check(matches(not(isDisplayed())))
+        Espresso.onView(withId(R.id.textview))
+            .check(matches(not(isDisplayed())))
+
+        Espresso.onView(withId(R.id.progress_bar))
+            .perform(screenshot("Loading_View"))
     }
 
     @Test
@@ -74,6 +99,9 @@ class MainFragmentTest {
         }
 
         testActivityRule.activity.replaceFragment(fragment)
+
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isCompletelyDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -84,6 +112,10 @@ class MainFragmentTest {
             .check(matches(isDisplayed()))
         Espresso.onView(withId(R.id.textview))
             .check(matches(withText(R.string.error_message)))
+
+        Screenshot.snapActivity(testActivityRule.activity)
+            .setName("Failed_Page")
+            .record()
     }
 
     @Test
@@ -96,6 +128,9 @@ class MainFragmentTest {
             }
         }
         testActivityRule.activity.replaceFragment(fragment)
+
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.no_data_message)), isCompletelyDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -106,6 +141,10 @@ class MainFragmentTest {
             .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
         Espresso.onView(withId(R.id.textview))
             .check(matches(withText(R.string.no_data_message)))
+
+        Screenshot.snapActivity(testActivityRule.activity)
+            .setName("Empty_Page")
+            .record()
     }
 
     fun loadLocalResponse(path:String):String {

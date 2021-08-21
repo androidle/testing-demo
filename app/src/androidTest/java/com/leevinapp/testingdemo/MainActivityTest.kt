@@ -29,7 +29,7 @@ class MainActivityTest {
 
     @Before
     fun setup() {
-        mockWebServer.start(8080)
+        mockWebServer.start(8000)
     }
 
     @After
