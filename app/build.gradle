@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.facebook.testing.screenshot'
 }
 
 android {
@@ -9,6 +10,10 @@ android {
     testOptions {
         unitTests {
             includeAndroidResources = true
+        }
+
+        testOptions {
+            execution 'ANDROIDX_TEST_ORCHESTRATOR'
         }
     }
 
@@ -19,7 +24,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "com.leevinapp.testingdemo.MockTestRunner"
+        testInstrumentationRunner "com.leevinapp.testingdemo.ScreenshotTestRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
     }
 
     buildTypes {
@@ -54,7 +60,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
-    implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.3.0'
 
     // MockWebserver
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.0"
@@ -63,6 +69,9 @@ dependencies {
     androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
 
     testImplementation 'junit:junit:4.13.2'
+
+    // testOptions ANDROIDX_TEST_ORCHESTRATOR
+    androidTestUtil 'androidx.test:orchestrator:1.2.0'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.3'
@@ -74,4 +83,9 @@ dependencies {
 
     def fragment_version = "1.3.6"
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
+}
+
+screenshots {
+    recordDir = "../screenshotTest"
+    multipleDevices false
 }
