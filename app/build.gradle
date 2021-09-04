@@ -1,8 +1,7 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'com.facebook.testing.screenshot'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.facebook.testing.screenshot'
+apply from:  'jacoco.gradle'
 
 android {
     compileSdkVersion 30

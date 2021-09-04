@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ## [x.x.x] - {Released / Unreleased}
 ### Added
+- Integrate jacoco plugin
 - Add UI testing with MockWebserver
 - Add 2 ways of fragment testing with MockWebserver
 ### Changed
