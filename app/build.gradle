@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.facebook.testing.screenshot'
-apply from:  'jacoco.gradle'
+apply from:  '../jacoco.gradle'
 
 android {
     compileSdkVersion 30
@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-
+    implementation project(":journeylib")
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
