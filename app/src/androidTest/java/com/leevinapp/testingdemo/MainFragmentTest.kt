@@ -86,9 +86,6 @@ class MainFragmentTest {
         Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
 
-//        Espresso.onView(withId(R.id.progress_bar))
-//            .perform(screenshot("Loading_View"))
-
         Screenshot.snapActivity(testActivityRule.activity)
             .setName("Loading_View")
             .record()
