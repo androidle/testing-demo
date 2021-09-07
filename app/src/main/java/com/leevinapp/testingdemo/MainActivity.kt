@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.openMainFragment.setOnClickListener {
-            startActivity(Intent(this,SingleFragmentActivity::class.java))
+            startActivity(Intent(this, SingleFragmentActivity::class.java))
         }
     }
 

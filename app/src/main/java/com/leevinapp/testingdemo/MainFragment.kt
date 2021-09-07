@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.test.espresso.idling.CountingIdlingResource
 import com.leevinapp.testingdemo.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,7 +30,6 @@ class MainFragment : Fragment() {
         val retrofit =
             RetrofitProvider(getBaseUrl(), OkHttpProvider.getOkHttpClient()).getRetrofit()
         val githubApi = retrofit.create(GithubApi::class.java)
-
 
         githubApi.testFetch().enqueue(object : Callback<List<GithubRepoResponse>> {
             override fun onResponse(

@@ -13,7 +13,6 @@ import androidx.test.rule.ActivityTestRule
 import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
-import com.leevinapp.testingdemo.utils.screenshot
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -32,7 +31,7 @@ class MainFragmentTest {
 
     @get:Rule
     val testActivityRule = ActivityTestRule(SingleFragmentActivity::class.java, true)
-    lateinit var fragment:MainFragment
+    lateinit var fragment: MainFragment
     @Before
     fun setUp() {
         mockWebServer.start(8000)
@@ -66,7 +65,6 @@ class MainFragmentTest {
             .check(matches(isDisplayed()))
         Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
-
 
         Screenshot.snapActivity(testActivityRule.activity)
             .setName("Success_Page")
@@ -148,7 +146,7 @@ class MainFragmentTest {
             .record()
     }
 
-    fun loadLocalResponse(path:String):String {
+    fun loadLocalResponse(path: String): String {
         return ResourceFile(path).readText()
     }
 }

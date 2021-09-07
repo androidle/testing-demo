@@ -8,7 +8,8 @@ import com.facebook.testing.screenshot.ScreenshotRunner
 
 class ScreenshotTestRunner : AndroidJUnitRunner() {
     override fun newApplication(
-        cl: ClassLoader?, className: String?,
+        cl: ClassLoader?,
+        className: String?,
         context: Context?
     ): Application {
         return super.newApplication(cl, TestApplication::class.java.name, context)

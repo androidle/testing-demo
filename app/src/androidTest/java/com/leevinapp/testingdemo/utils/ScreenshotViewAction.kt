@@ -24,19 +24,19 @@ import com.facebook.testing.screenshot.Screenshot
 import org.hamcrest.Matcher
 
 fun screenshot(name: String): ViewAction {
-  return ScreenshotViewAction(name)
+    return ScreenshotViewAction(name)
 }
 
 class ScreenshotViewAction internal constructor(private val name: String) : ViewAction {
-  override fun getConstraints(): Matcher<View> {
-    return isDisplayed()
-  }
+    override fun getConstraints(): Matcher<View> {
+        return isDisplayed()
+    }
 
-  override fun getDescription(): String {
-    return name
-  }
+    override fun getDescription(): String {
+        return name
+    }
 
-  override fun perform(uiController: UiController, view: View) {
-    Screenshot.snap(view).setName(name).record()
-  }
+    override fun perform(uiController: UiController, view: View) {
+        Screenshot.snap(view).setName(name).record()
+    }
 }

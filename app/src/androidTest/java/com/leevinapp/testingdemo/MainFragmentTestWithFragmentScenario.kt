@@ -28,12 +28,11 @@ import java.util.concurrent.TimeUnit
 @RunWith(AndroidJUnit4::class)
 class MainFragmentTestWithFragmentScenario {
 
-
     private val mockWebServer = MockWebServer()
 
     @Before
     fun setup() {
-        IdlingPolicies.setIdlingResourceTimeout(3,TimeUnit.MINUTES)
+        IdlingPolicies.setIdlingResourceTimeout(3, TimeUnit.MINUTES)
         mockWebServer.start(8000)
     }
 
@@ -111,7 +110,7 @@ class MainFragmentTestWithFragmentScenario {
             .check(matches(withText(R.string.no_data_message)))
     }
 
-    fun loadLocalResponse(path:String):String {
+    fun loadLocalResponse(path: String): String {
         return ResourceFile(path).readText()
     }
 

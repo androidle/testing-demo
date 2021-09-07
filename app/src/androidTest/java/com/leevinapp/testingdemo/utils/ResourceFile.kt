@@ -8,7 +8,6 @@ class ResourceFile(
     private val loader: ClassLoader
         get() = Thread.currentThread().contextClassLoader ?: error("Class loader not available!")
 
-
     fun exist(): Boolean {
         return loader.getResource(filePath) != null
     }

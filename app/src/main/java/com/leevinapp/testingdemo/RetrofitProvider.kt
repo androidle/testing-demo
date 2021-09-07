@@ -8,9 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitProvider(private val baseUrl: String, private val okHttpClient: OkHttpClient) {
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setPrettyPrinting().create()))
-                .client(okHttpClient)
-                .build()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setPrettyPrinting().create()))
+            .client(okHttpClient)
+            .build()
     }
 }

@@ -10,9 +10,9 @@ object OkHttpProvider {
     fun getOkHttpClient(): OkHttpClient {
         return if (okHttpClient == null) {
             val okHttpClient = OkHttpClient.Builder()
-                    .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
-                    .connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
-                    .build()
+                .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+                .connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+                .build()
             this.okHttpClient = okHttpClient
             okHttpClient
         } else {
