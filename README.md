@@ -42,9 +42,15 @@ This project is to show the practice testing on android
   ```
   ./gradlew :journeylib:jacocoTestReport sonarqube -Dsonar.host.url=http://localhost:9000/
   ```
-* Publish android artifact [maven-publish-plugin](https://docs.gradle.org/current/userguide/publishing_maven.html)
-  1.Google doc refers to [Use the Maven Publish plugin](https://developer.android.com/studio/build/maven-publish-plugin)
-  2.Code gist refers to [maven-publish-gradle](https://gist.github.com/Robyer/a6578e60127418b380ca133a1291f017)
+* Publish android
+  artifact [maven-publish-plugin](https://docs.gradle.org/current/userguide/publishing_maven.html)
+
+    1. Google
+       doc [Use the Maven Publish plugin](https://developer.android.com/studio/build/maven-publish-plugin)
+    2. Code gist refers
+       to [maven-publish-gradle](https://gist.github.com/Robyer/a6578e60127418b380ca133a1291f017)
+
+* Code style with [ktlint](https://ktlint.github.io/)
   
 
 
