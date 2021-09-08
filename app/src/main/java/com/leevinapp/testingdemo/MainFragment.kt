@@ -29,7 +29,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val retrofit =
             RetrofitProvider(getBaseUrl(), OkHttpProvider.getOkHttpClient()).getRetrofit()
-        val githubApi = retrofit.create(GithubApi::class.java)
+        val githubApi = retrofit.create(GithubApiService::class.java)
 
         githubApi.testFetch().enqueue(object : Callback<List<GithubRepoResponse>> {
             override fun onResponse(

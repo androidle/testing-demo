@@ -8,19 +8,21 @@ import com.leevinapp.testingdemo.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    @Inject
+    lateinit var githubApiService: GithubApiService
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as DemoApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val retrofit = RetrofitProvider(getBaseUrl(), OkHttpProvider.getOkHttpClient()).getRetrofit()
-        val githubApi = retrofit.create(GithubApi::class.java)
-
-        githubApi.testFetch().enqueue(object : Callback<List<GithubRepoResponse>> {
+        githubApiService.testFetch().enqueue(object : Callback<List<GithubRepoResponse>> {
             override fun onResponse(call: Call<List<GithubRepoResponse>>, response: Response<List<GithubRepoResponse>>) {
                 if (response.isSuccessful && response.body() != null) {
                     val result = response.body()!!
@@ -63,9 +65,5 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar.visibility = View.GONE
         binding.textview.visibility = View.VISIBLE
         binding.textview.text = getString(R.string.error_message)
-    }
-
-    private fun getBaseUrl(): String {
-        return (applicationContext as BaseUrlProvider).getBaseUrl()
     }
 }

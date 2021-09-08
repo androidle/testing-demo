@@ -1,9 +1,11 @@
 package com.leevinapp.testingdemo
 
 import android.app.Application
+import com.leevinapp.testingdemo.di.AppComponent
+import com.leevinapp.testingdemo.di.DaggerAppComponent
 
-class DemoApplication : Application(), BaseUrlProvider {
-    override fun getBaseUrl(): String {
-        return "https://api.github.com"
+class DemoApplication : Application() {
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.factory().create(applicationContext)
     }
 }
