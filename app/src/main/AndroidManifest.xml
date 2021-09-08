@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         tools:replace="android:theme"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SingleFragmentActivity"
+        <activity android:name=".ui.SingleFragmentActivity"
             android:screenOrientation="portrait"/>
     </application>
 

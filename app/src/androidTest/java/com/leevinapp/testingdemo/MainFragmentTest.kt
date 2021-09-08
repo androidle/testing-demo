@@ -11,6 +11,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.facebook.testing.screenshot.Screenshot
+import com.leevinapp.testingdemo.ui.MainFragment
+import com.leevinapp.testingdemo.ui.SingleFragmentActivity
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
 import okhttp3.mockwebserver.Dispatcher

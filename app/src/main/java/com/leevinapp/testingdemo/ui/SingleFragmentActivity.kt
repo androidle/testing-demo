@@ -1,8 +1,9 @@
-package com.leevinapp.testingdemo
+package com.leevinapp.testingdemo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.leevinapp.testingdemo.R
 
 class SingleFragmentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
