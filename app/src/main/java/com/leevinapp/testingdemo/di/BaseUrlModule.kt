@@ -5,10 +5,10 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class TestBaseUrlModule {
+class BaseUrlModule {
     @Singleton
     @Provides
     fun providerBaseUrl(): String {
-        return "http://localhost:8000"
+        return "https://api.github.com"
     }
 }

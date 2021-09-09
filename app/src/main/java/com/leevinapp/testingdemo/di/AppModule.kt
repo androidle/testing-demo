@@ -19,12 +19,6 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providerBaseUrl(): String {
-        return "https://api.github.com"
-    }
-
-    @Singleton
-    @Provides
     fun providerOkhttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)

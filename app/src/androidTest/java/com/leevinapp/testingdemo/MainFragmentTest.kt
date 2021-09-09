@@ -1,5 +1,8 @@
 package com.leevinapp.testingdemo
 
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.lifecycle.Lifecycle
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -8,8 +11,6 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
 import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.ui.MainFragment
 import com.leevinapp.testingdemo.utils.ResourceFile
@@ -22,7 +23,6 @@ import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
@@ -30,17 +30,12 @@ import java.util.concurrent.TimeUnit
 @RunWith(AndroidJUnit4::class)
 class MainFragmentTest {
 
-    @get:Rule
-    val testActivityRule = ActivityTestRule(SingleFragmentActivity::class.java, true, true)
-
-    lateinit var fragment: MainFragment
-
     private val mockWebServer = MockWebServer()
+    private var activity: FragmentActivity? = null
 
     @Before
-    fun setUp() {
+    fun setup() {
         mockWebServer.start(8000)
-        fragment = MainFragment()
     }
 
     @After
@@ -58,8 +53,7 @@ class MainFragmentTest {
             }
         }
 
-        testActivityRule.activity.replaceFragment(fragment)
-
+        launchAndMoveToResume()
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(withId(R.id.textviewSuccess), isDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -68,11 +62,15 @@ class MainFragmentTest {
             .check(matches(isDisplayed()))
         Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
+
+        Screenshot.snapActivity(activity)
+            .setName("Success_Page")
+            .record()
     }
 
     @Test
     fun testLoadingBeforeResponseReturn() {
-        testActivityRule.activity.replaceFragment(fragment)
+        launchAndMoveToResume()
 
         Espresso.onView(withId(R.id.progress_bar))
             .check(matches(isDisplayed()))
@@ -83,7 +81,7 @@ class MainFragmentTest {
         Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
 
-        Screenshot.snapActivity(testActivityRule.activity)
+        Screenshot.snapActivity(activity)
             .setName("Loading_View")
             .record()
     }
@@ -96,11 +94,9 @@ class MainFragmentTest {
             }
         }
 
-        testActivityRule.activity.replaceFragment(fragment)
+        launchAndMoveToResume()
 
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
-
-        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isCompletelyDisplayed())
+        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))
             .check(matches(not(isDisplayed())))
@@ -111,13 +107,14 @@ class MainFragmentTest {
         Espresso.onView(withId(R.id.textview))
             .check(matches(withText(R.string.error_message)))
 
-        Screenshot.snapActivity(testActivityRule.activity)
+        Screenshot.snapActivity(activity)
             .setName("Failed_Page")
             .record()
     }
 
     @Test
     fun testEmptyResponse() {
+        // Given
         mockWebServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return MockResponse()
@@ -125,12 +122,11 @@ class MainFragmentTest {
                     .setBody("[]")
             }
         }
-        testActivityRule.activity.replaceFragment(fragment)
-
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
-
+        // When
+        launchAndMoveToResume()
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.no_data_message)), isCompletelyDisplayed())
 
+        // Then
         Espresso.onView(withId(R.id.progress_bar))
             .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
         Espresso.onView(withId(R.id.textviewSuccess))
@@ -140,12 +136,20 @@ class MainFragmentTest {
         Espresso.onView(withId(R.id.textview))
             .check(matches(withText(R.string.no_data_message)))
 
-        Screenshot.snapActivity(testActivityRule.activity)
+        Screenshot.snapActivity(activity)
             .setName("Empty_Page")
             .record()
     }
 
     fun loadLocalResponse(path: String): String {
         return ResourceFile(path).readText()
+    }
+
+    private fun launchAndMoveToResume() {
+        launchFragmentInContainer<MainFragment>(themeResId = R.style.AppTheme).moveToState(
+            Lifecycle.State.RESUMED
+        ).onFragment {
+            this.activity = it.activity
+        }
     }
 }
