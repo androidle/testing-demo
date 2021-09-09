@@ -13,7 +13,7 @@ class SingleFragmentActivity : AppCompatActivity() {
 
     fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container,fragment,fragment::class.java.canonicalName)
+            .replace(R.id.container, fragment, fragment::class.java.canonicalName)
             .commit()
     }
 }

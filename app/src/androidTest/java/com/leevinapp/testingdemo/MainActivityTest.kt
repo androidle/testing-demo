@@ -7,8 +7,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import okhttp3.mockwebserver.Dispatcher
 import com.leevinapp.testingdemo.utils.ResourceFile
+import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
@@ -42,18 +42,18 @@ class MainActivityTest {
         mockWebServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return MockResponse()
-                        .setResponseCode(200)
-                        .setBody(loadLocalResponse("success_response.json"))
+                    .setResponseCode(200)
+                    .setBody(loadLocalResponse("success_response.json"))
             }
         }
         activityRule.launchActivity(null)
 
         Espresso.onView(withId(R.id.progress_bar))
-                .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
+            .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
         Espresso.onView(withId(R.id.textviewSuccess))
-                .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
+            .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
         Espresso.onView(withId(R.id.textview))
-                .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
+            .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
     }
 
     @Test
@@ -67,13 +67,13 @@ class MainActivityTest {
         activityRule.launchActivity(null)
 
         Espresso.onView(withId(R.id.progress_bar))
-                .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
+            .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
         Espresso.onView(withId(R.id.textviewSuccess))
-                .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
+            .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
         Espresso.onView(withId(R.id.textview))
-                .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
+            .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
         Espresso.onView(withId(R.id.textview))
-                .check(ViewAssertions.matches(withText(R.string.error_message)))
+            .check(ViewAssertions.matches(withText(R.string.error_message)))
     }
 
     @Test
@@ -98,8 +98,7 @@ class MainActivityTest {
             .check(ViewAssertions.matches(withText(R.string.no_data_message)))
     }
 
-    fun loadLocalResponse(path:String):String {
+    fun loadLocalResponse(path: String): String {
         return ResourceFile(path).readText()
     }
-
 }
