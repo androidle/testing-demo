@@ -12,7 +12,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.ui.MainFragment
-import com.leevinapp.testingdemo.ui.SingleFragmentActivity
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
 import okhttp3.mockwebserver.Dispatcher
@@ -32,15 +31,17 @@ import java.util.concurrent.TimeUnit
 class MainFragmentTest {
 
     @get:Rule
-    val testActivityRule = ActivityTestRule(SingleFragmentActivity::class.java, true)
+    val testActivityRule = ActivityTestRule(SingleFragmentActivity::class.java, true, true)
+
     lateinit var fragment: MainFragment
+
+    private val mockWebServer = MockWebServer()
+
     @Before
     fun setUp() {
         mockWebServer.start(8000)
         fragment = MainFragment()
     }
-
-    private val mockWebServer = MockWebServer()
 
     @After
     fun tearDown() {
@@ -67,10 +68,6 @@ class MainFragmentTest {
             .check(matches(isDisplayed()))
         Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
-
-        Screenshot.snapActivity(testActivityRule.activity)
-            .setName("Success_Page")
-            .record()
     }
 
     @Test

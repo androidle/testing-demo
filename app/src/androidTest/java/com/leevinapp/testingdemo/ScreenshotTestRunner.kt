@@ -12,7 +12,7 @@ class ScreenshotTestRunner : AndroidJUnitRunner() {
         className: String?,
         context: Context?
     ): Application {
-        return super.newApplication(cl, TestApplication::class.java.name, context)
+        return super.newApplication(cl, TestDemoApplication::class.java.name, context)
     }
 
     override fun onCreate(arguments: Bundle) {

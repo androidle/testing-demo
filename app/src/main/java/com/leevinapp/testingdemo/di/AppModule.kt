@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-private const val REQUEST_TIMEOUT = 30L
+const val REQUEST_TIMEOUT = 30L
 
 @Module
 class AppModule {

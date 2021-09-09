@@ -1,4 +1,8 @@
 package com.leevinapp.testingdemo.di
 
-class TestAppComponent {
-}
+import dagger.Component
+import javax.inject.Singleton
+
+@Singleton
+@Component(modules = [TestAppModule::class, ViewModelModule::class])
+interface TestAppComponent : AppComponent

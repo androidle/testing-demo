@@ -18,6 +18,6 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    fun inject(activity: MainActivity)
     fun inject(fragment: MainFragment)
+    fun inject(activity: MainActivity)
 }

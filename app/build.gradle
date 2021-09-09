@@ -68,9 +68,12 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     // Dagger2
-    def dagger_version = "2.27"
+    def dagger_version = "2.38"
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // fix no generate code in debugAndroidTest
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
 
     // MockWebserver
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.0"

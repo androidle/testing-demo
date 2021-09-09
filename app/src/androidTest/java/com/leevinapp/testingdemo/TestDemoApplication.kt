@@ -1,5 +1,8 @@
 package com.leevinapp.testingdemo
 
-import android.app.Application
+import com.leevinapp.testingdemo.di.DaggerTestAppComponent
+import com.leevinapp.testingdemo.di.TestAppComponent
 
-class TestApplication : Application()
+class TestDemoApplication : DemoApplication() {
+    override val appComponent: TestAppComponent = DaggerTestAppComponent.create()
+}

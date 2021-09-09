@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.leevinapp.testingdemo.DemoApplication
 import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.common.Result
@@ -20,7 +21,6 @@ class MainFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val viewModel: MainViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -48,20 +48,23 @@ class MainFragment : Fragment() {
     }
 
     private fun observerViewModel() {
-        viewModel.userDataResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Success -> {
-                    if (result.data.isNotEmpty()) {
-                        showSuccessDataState(result.data)
-                    } else {
-                        showEmptyDataState()
+        viewModel.userDataResult.observe(
+            viewLifecycleOwner,
+            Observer { result ->
+                when (result) {
+                    is Result.Success -> {
+                        if (result.data.isNotEmpty()) {
+                            showSuccessDataState(result.data)
+                        } else {
+                            showEmptyDataState()
+                        }
+                    }
+                    is Result.Error -> {
+                        showErrorState()
                     }
                 }
-                is Result.Error -> {
-                    showErrorState()
-                }
             }
-        }
+        )
     }
 
     private fun showSuccessDataState(body: List<GithubRepo>) {
