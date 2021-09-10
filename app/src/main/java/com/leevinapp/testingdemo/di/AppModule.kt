@@ -1,6 +1,7 @@
 package com.leevinapp.testingdemo.di
 
 import com.google.gson.GsonBuilder
+import com.leevinapp.testingdemo.addLoggingInterceptor
 import com.leevinapp.testingdemo.data.GithubApiService
 import com.leevinapp.testingdemo.data.UserDataRepositoryImpl
 import com.leevinapp.testingdemo.repository.UserDataRepository
@@ -23,6 +24,7 @@ class AppModule {
         return OkHttpClient.Builder()
             .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
+            .addLoggingInterceptor()
             .build()
     }
 

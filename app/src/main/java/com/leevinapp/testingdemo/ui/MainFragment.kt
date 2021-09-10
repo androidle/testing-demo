@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.leevinapp.testingdemo.DemoApplication
 import com.leevinapp.testingdemo.R
-import com.leevinapp.testingdemo.common.Result
+import com.leevinapp.testingdemo.common.Resource
 import com.leevinapp.testingdemo.common.ViewModelFactory
 import com.leevinapp.testingdemo.databinding.FragmentMainBinding
 import com.leevinapp.testingdemo.repository.model.GithubRepo
@@ -52,14 +52,14 @@ class MainFragment : Fragment() {
             viewLifecycleOwner,
             Observer { result ->
                 when (result) {
-                    is Result.Success -> {
+                    is Resource.Success -> {
                         if (result.data.isNotEmpty()) {
                             showSuccessDataState(result.data)
                         } else {
                             showEmptyDataState()
                         }
                     }
-                    is Result.Error -> {
+                    is Resource.Error -> {
                         showErrorState()
                     }
                 }

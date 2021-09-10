@@ -3,15 +3,13 @@ apply plugin: 'jacoco'
  * The correct path of the report is $rootProjectDir/app/build/reports/jacoco/index.html
  * to run this task use: ./gradlew clean jacocoTestReport
  */
-
-def mainSrc = "{$project.projectDir}/src/main/java"
 def fileFilter = [
         //Classes I intentionally don't want to test
-        '**/*App.*',
-        '**/*Application.',
+        '**/*Application.*',
         '**/*Activity**',
+        '**/BuildConfig.*',
         '**/*Fragment**',
-        '**/*View**',
+        '**/*View.*',
         '**/*Adapter**',
         '**/*ViewHolder**',
         '**/extension/**',
@@ -24,8 +22,11 @@ def fileFilter = [
         '**/*_*Factory*.*',
         '**/*Component*.*',
         '**/*Module*.*',
-        '**/databinding/**'
+        '**/databinding/**',
+        '**/model/**'
 ]
+
+def mainSrc = "${project.projectDir}/src/main/java"
 
 def javaDebugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug", excludes: fileFilter)
 def kotlinDebugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
