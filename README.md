@@ -30,7 +30,11 @@ This project is to show the practice testing on android
 - [Espresso](https://developer.android.com/training/testing/espresso)
 - [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
 - [screenshot-tests-for-android](https://github.com/facebook/screenshot-tests-for-android)
-
+- [Dagger2](https://dagger.dev/)
+  
+  1.The target reference ![App dependency diagram](dagger-dependency-diagram.png) that from the
+  codelab [android-dagger](https://developer.android.com/codelabs/android-dagger)
+  
 ## Plugins
 
 * Code coverage with [jacoco](https://github.com/jacoco/jacoco)

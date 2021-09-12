@@ -47,7 +47,7 @@ class ViewIdlingResource(
 
         fun waitUntilIdleMatcherIsFulfilled(
             viewMatcher: Matcher<View>,
-            idleMatcher: Matcher<View>,
+            idleMatcher: Matcher<View>
         ) {
             val idlingResource = ViewIdlingResource(viewMatcher, idleMatcher)
             try {

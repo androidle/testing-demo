@@ -1,4 +1,6 @@
-package com.leevinapp.testingdemo
+package com.leevinapp.testingdemo.data.model
+
+import com.leevinapp.testingdemo.repository.model.GithubRepo
 
 data class GithubRepoResponse(
     val archive_url: String?,
@@ -74,7 +76,18 @@ data class GithubRepoResponse(
     val url: String?,
     val watchers: Int?,
     val watchers_count: Int?
-)
+) {
+    fun toModel(): GithubRepo {
+        return GithubRepo(
+            archive_url = this.archive_url,
+            archived = this.archived,
+            assignees_url = this.assignees_url,
+            blobs_url = this.blobs_url,
+            branches_url = this.branches_url,
+            clone_url = this.clone_url
+        )
+    }
+}
 
 data class Owner(
     val avatar_url: String?,
