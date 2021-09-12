@@ -31,10 +31,11 @@ This project is to show the practice testing on android
 - [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
 - [screenshot-tests-for-android](https://github.com/facebook/screenshot-tests-for-android)
 - [Dagger2](https://dagger.dev/)
-  
-  1.The target reference ![App dependency diagram](dagger-dependency-diagram.png) that from the
-  codelab [android-dagger](https://developer.android.com/codelabs/android-dagger)
-  
+
+  1. The target reference ![App dependency diagram](dagger-dependency-diagram.png)
+     that from the codelab [android-dagger](https://developer.android.com/codelabs/android-dagger)
+  2. Base on #1 graph above, this leads to a new issue on ui testing of how to handle dependency inject?
+     The FragmentScenario can't be used directly.
 ## Plugins
 
 * Code coverage with [jacoco](https://github.com/jacoco/jacoco)
