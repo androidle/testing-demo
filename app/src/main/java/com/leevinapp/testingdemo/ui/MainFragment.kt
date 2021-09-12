@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.leevinapp.testingdemo.DemoApplication
@@ -15,17 +16,20 @@ import com.leevinapp.testingdemo.common.ViewModelFactory
 import com.leevinapp.testingdemo.databinding.FragmentMainBinding
 import com.leevinapp.testingdemo.repository.model.GithubRepo
 import javax.inject.Inject
+import timber.log.Timber
 
 class MainFragment : Fragment() {
+
     private lateinit var binding: FragmentMainBinding
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private val viewModel: MainViewModel by viewModels { viewModelFactory }
+
+    private val viewModel: MainViewModel by activityViewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity?.applicationContext as DemoApplication).appComponent.inject(this)
+        (activity as MainActivity).activityComponent.fragmentComponent().create(this).inject(this)
     }
 
     override fun onCreateView(
@@ -41,6 +45,8 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initData()
         observerViewModel()
+        Timber.e("=====viewModelFactory=====$viewModelFactory")
+        Timber.e("=====viewModel=====$viewModel")
     }
 
     private fun initData() {

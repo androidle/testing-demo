@@ -27,6 +27,7 @@ def fileFilter = [
 ]
 
 def mainSrc = "${project.projectDir}/src/main/java"
+def debugSrc = "${project.projectDir}/src/debug/java"
 
 def javaDebugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug", excludes: fileFilter)
 def kotlinDebugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
@@ -39,7 +40,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ["testDebugUnitTest"]) {
         html.enabled = true
     }
 
-    sourceDirectories.from = files([mainSrc])
+    sourceDirectories.from = files([mainSrc,debugSrc])
     classDirectories.from = files([javaDebugTree, kotlinDebugTree])
 
     executionData.from = fileTree(dir: "$buildDir", includes: [

@@ -11,7 +11,7 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelModule {
-
+    // TODO: 2021/9/12 what's the scope of viewModelFactory
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
