@@ -6,17 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.leevinapp.testingdemo.DemoApplication
 import com.leevinapp.testingdemo.R
+import com.leevinapp.testingdemo.common.FragmentInjector
 import com.leevinapp.testingdemo.common.Resource
 import com.leevinapp.testingdemo.common.ViewModelFactory
 import com.leevinapp.testingdemo.databinding.FragmentMainBinding
 import com.leevinapp.testingdemo.repository.model.GithubRepo
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
@@ -25,11 +24,11 @@ class MainFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel: MainViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as MainActivity).activityComponent.fragmentComponent().create(this).inject(this)
+        (requireActivity() as FragmentInjector).inject(this)
     }
 
     override fun onCreateView(

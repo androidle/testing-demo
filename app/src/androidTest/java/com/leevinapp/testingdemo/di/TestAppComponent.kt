@@ -5,4 +5,4 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AppModule::class, TestBaseUrlModule::class, ViewModelModule::class])
-interface TestAppComponent : AppComponent
+interface TestAppComponent : ApplicationComponent

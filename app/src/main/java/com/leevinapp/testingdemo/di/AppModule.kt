@@ -1,7 +1,9 @@
 package com.leevinapp.testingdemo.di
 
+import android.content.Context
 import com.google.gson.GsonBuilder
 import com.leevinapp.testingdemo.addLoggingInterceptor
+import com.leevinapp.testingdemo.common.ActivityInjector
 import com.leevinapp.testingdemo.data.GithubApiService
 import com.leevinapp.testingdemo.data.UserDataRepositoryImpl
 import com.leevinapp.testingdemo.repository.UserDataRepository
@@ -15,7 +17,7 @@ import javax.inject.Singleton
 
 const val REQUEST_TIMEOUT = 30L
 
-@Module
+@Module(subcomponents = [ActivityComponent::class])
 class AppModule {
 
     @Singleton
@@ -52,4 +54,12 @@ class AppModule {
     fun providerUserDataRepository(githubApiService: GithubApiService): UserDataRepository {
         return UserDataRepositoryImpl(githubApiService)
     }
+
+    @Provides
+    fun providerApplicationComponentProvider(context: Context) = context as ApplicationComponentProvider
+
+    @Singleton
+    @Provides
+    fun providerActivityInjector(applicationComponentProvider: ApplicationComponentProvider): ActivityInjector =
+        SpecificActivityInjector(applicationComponentProvider)
 }
