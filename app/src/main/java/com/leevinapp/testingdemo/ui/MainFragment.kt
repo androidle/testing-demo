@@ -1,22 +1,22 @@
 package com.leevinapp.testingdemo.ui
 
-import android.content.Context
+import android.app.Dialog
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.activityViewModels
 import com.leevinapp.testingdemo.R
-import com.leevinapp.testingdemo.common.FragmentInjector
 import com.leevinapp.testingdemo.common.Resource
 import com.leevinapp.testingdemo.common.ViewModelFactory
 import com.leevinapp.testingdemo.databinding.FragmentMainBinding
 import com.leevinapp.testingdemo.repository.model.GithubRepo
-import timber.log.Timber
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
@@ -24,12 +24,13 @@ class MainFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel: MainViewModel by viewModels { viewModelFactory }
+    @Inject
+    lateinit var dialog: Dialog
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity() as FragmentInjector).inject(this)
-    }
+    @Inject
+    lateinit var resourcesGlobal: Resources
+
+    private val viewModel: MainViewModel by activityViewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,8 +45,6 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initData()
         observerViewModel()
-        Timber.e("=====viewModelFactory=====$viewModelFactory")
-        Timber.e("=====viewModel=====$viewModel")
     }
 
     private fun initData() {
@@ -55,7 +54,7 @@ class MainFragment : Fragment() {
     private fun observerViewModel() {
         viewModel.userDataResult.observe(
             viewLifecycleOwner,
-            Observer { result ->
+            { result ->
                 when (result) {
                     is Resource.Success -> {
                         if (result.data.isNotEmpty()) {

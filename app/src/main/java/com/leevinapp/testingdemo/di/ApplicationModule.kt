@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.res.Resources
 import com.google.gson.GsonBuilder
 import com.leevinapp.testingdemo.addLoggingInterceptor
-import com.leevinapp.testingdemo.common.ActivityInjector
 import com.leevinapp.testingdemo.data.GithubApiService
 import com.leevinapp.testingdemo.data.UserDataRepositoryImpl
 import com.leevinapp.testingdemo.repository.UserDataRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,7 +20,8 @@ import javax.inject.Singleton
 
 const val REQUEST_TIMEOUT = 30L
 
-@Module(subcomponents = [ActivityComponent::class])
+@Module
+@InstallIn(SingletonComponent::class)
 class ApplicationModule {
 
     @Singleton
@@ -57,13 +60,5 @@ class ApplicationModule {
     }
 
     @Provides
-    fun providerApplicationComponentProvider(context: Context) = context as ApplicationComponentProvider
-
-    @Provides
-    fun providerResources(context: Context): Resources = context.resources
-
-    @Singleton
-    @Provides
-    fun providerActivityInjector(applicationComponentProvider: ApplicationComponentProvider): ActivityInjector =
-        SpecificActivityInjector(applicationComponentProvider)
+    fun providerResources(@ApplicationContext context: Context): Resources = context.resources
 }

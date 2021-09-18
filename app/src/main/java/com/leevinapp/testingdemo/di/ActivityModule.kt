@@ -1,17 +1,23 @@
 package com.leevinapp.testingdemo.di
 
-import android.app.Activity
-import com.leevinapp.testingdemo.common.FragmentInjector
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.scopes.ActivityScoped
 
-@Module(includes = [ViewModelModule::class], subcomponents = [FragmentComponent::class])
+@Module
+@InstallIn(ActivityComponent::class)
 class ActivityModule {
 
+    @ActivityScoped
     @Provides
-    fun providerActivityComponentProvider(activity: Activity) = activity as ActivityComponentProvider
-
-    @Provides
-    fun providerFragmentInjector(activityComponentProvider: ActivityComponentProvider): FragmentInjector =
-        SpecificFragmentInjector(activityComponentProvider)
+    fun providerLoadingSpinner(@ActivityContext context: Context): Dialog {
+        return AlertDialog.Builder(context).setTitle("loading Test")
+            .create()
+    }
 }

@@ -7,9 +7,12 @@ import com.leevinapp.testingdemo.common.ViewModelKey
 import com.leevinapp.testingdemo.ui.MainViewModel
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.multibindings.IntoMap
 
 @Module
+@InstallIn(ActivityComponent::class)
 abstract class ViewModelModule {
 
     @Binds

@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.test.runner.AndroidJUnitRunner
 import com.facebook.testing.screenshot.ScreenshotRunner
+import dagger.hilt.android.testing.HiltTestApplication
 
 class ScreenshotTestRunner : AndroidJUnitRunner() {
     override fun newApplication(
@@ -12,7 +13,7 @@ class ScreenshotTestRunner : AndroidJUnitRunner() {
         className: String?,
         context: Context?
     ): Application {
-        return super.newApplication(cl, TestDemoApplication::class.java.name, context)
+        return super.newApplication(cl, HiltTestApplication::class.java.name, context)
     }
 
     override fun onCreate(arguments: Bundle) {

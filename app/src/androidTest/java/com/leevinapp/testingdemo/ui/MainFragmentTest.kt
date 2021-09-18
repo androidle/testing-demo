@@ -1,7 +1,6 @@
-package com.leevinapp.testingdemo
+package com.leevinapp.testingdemo.ui
 
 import android.app.Activity
-import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -11,10 +10,14 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.facebook.testing.screenshot.Screenshot
-import com.leevinapp.testingdemo.ui.MainActivity
-import com.leevinapp.testingdemo.ui.MainFragment
+import com.leevinapp.testingdemo.R
+import com.leevinapp.testingdemo.di.BaseUrlModule
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
+import com.leevinapp.testingdemo.utils.launchFragmentInHiltContainer
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -23,16 +26,22 @@ import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
+@HiltAndroidTest
+@UninstallModules(BaseUrlModule::class)
 @RunWith(AndroidJUnit4::class)
 class MainFragmentTest {
 
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
     private val mockWebServer = MockWebServer()
 
-    private lateinit var activity: Activity
+    private lateinit var testActivity: Activity
 
     @Before
     fun setup() {
@@ -54,8 +63,8 @@ class MainFragmentTest {
             }
         }
 
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        launchFragmentInHiltContainer<MainFragment> {
+            testActivity = this.requireActivity()
         }
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(withId(R.id.textviewSuccess), isDisplayed())
 
@@ -66,15 +75,15 @@ class MainFragmentTest {
         Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
 
-        Screenshot.snapActivity(activity)
+        Screenshot.snapActivity(testActivity)
             .setName("Success_Page")
             .record()
     }
 
     @Test
     fun testLoadingBeforeResponseReturn() {
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        launchFragmentInHiltContainer<MainFragment> {
+            testActivity = this.requireActivity()
         }
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -86,7 +95,7 @@ class MainFragmentTest {
         Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
 
-        Screenshot.snapActivity(activity)
+        Screenshot.snapActivity(testActivity)
             .setName("Loading_View")
             .record()
     }
@@ -99,8 +108,8 @@ class MainFragmentTest {
             }
         }
 
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        launchFragmentInHiltContainer<MainFragment> {
+            testActivity = this.requireActivity()
         }
 
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isDisplayed())
@@ -114,7 +123,7 @@ class MainFragmentTest {
         Espresso.onView(withId(R.id.textview))
             .check(matches(withText(R.string.error_message)))
 
-        Screenshot.snapActivity(activity)
+        Screenshot.snapActivity(testActivity)
             .setName("Failed_Page")
             .record()
     }
@@ -130,8 +139,8 @@ class MainFragmentTest {
             }
         }
         // When
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        launchFragmentInHiltContainer<MainFragment> {
+            testActivity = this.requireActivity()
         }
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.no_data_message)), isCompletelyDisplayed())
 
@@ -145,7 +154,7 @@ class MainFragmentTest {
         Espresso.onView(withId(R.id.textview))
             .check(matches(withText(R.string.no_data_message)))
 
-        Screenshot.snapActivity(activity)
+        Screenshot.snapActivity(testActivity)
             .setName("Empty_Page")
             .record()
     }
