@@ -1,6 +1,7 @@
 package com.leevinapp.testingdemo.di
 
 import android.content.Context
+import android.content.res.Resources
 import com.google.gson.GsonBuilder
 import com.leevinapp.testingdemo.addLoggingInterceptor
 import com.leevinapp.testingdemo.common.ActivityInjector
@@ -18,7 +19,7 @@ import javax.inject.Singleton
 const val REQUEST_TIMEOUT = 30L
 
 @Module(subcomponents = [ActivityComponent::class])
-class AppModule {
+class ApplicationModule {
 
     @Singleton
     @Provides
@@ -57,6 +58,9 @@ class AppModule {
 
     @Provides
     fun providerApplicationComponentProvider(context: Context) = context as ApplicationComponentProvider
+
+    @Provides
+    fun providerResources(context: Context): Resources = context.resources
 
     @Singleton
     @Provides

@@ -13,22 +13,20 @@ import com.leevinapp.testingdemo.di.ActivityComponent
 import com.leevinapp.testingdemo.di.ActivityComponentProvider
 import timber.log.Timber
 import javax.inject.Inject
-import javax.inject.Provider
 
 class MainActivity : AppCompatActivity(), ActivityComponentProvider, FragmentInjector {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
     @Inject
-    lateinit var activityComponentFactoryProvider: Provider<ActivityComponent.Factory>
-
-    @Inject
     lateinit var fragmentInjector: FragmentInjector
 
     private val viewModel: MainViewModel by viewModels { viewModelFactory }
 
+    private lateinit var activityComponent: ActivityComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as ActivityInjector).inject(this)
+        activityComponent = (application as ActivityInjector).inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_fragment)
         supportFragmentManager.commit {
@@ -44,8 +42,9 @@ class MainActivity : AppCompatActivity(), ActivityComponentProvider, FragmentInj
     }
 
     override val component: ActivityComponent by lazy {
-        activityComponentFactoryProvider.get()
-            .create(this)
+        // fix ActivityComponent duplicated issue to make sure
+        // inject ActivityComponent consistency with inject fragment
+        activityComponent
     }
 
     override fun inject(fragment: Fragment) {

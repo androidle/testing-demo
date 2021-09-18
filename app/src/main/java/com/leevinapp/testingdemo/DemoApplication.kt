@@ -3,6 +3,7 @@ package com.leevinapp.testingdemo
 import android.app.Activity
 import android.app.Application
 import com.leevinapp.testingdemo.common.ActivityInjector
+import com.leevinapp.testingdemo.di.ActivityComponent
 import com.leevinapp.testingdemo.di.ApplicationComponent
 import com.leevinapp.testingdemo.di.ApplicationComponentProvider
 import com.leevinapp.testingdemo.di.DaggerApplicationComponent
@@ -23,7 +24,7 @@ open class DemoApplication : Application(), ApplicationComponentProvider, Activi
         DebugUtils.initTimber()
     }
 
-    override fun inject(activity: Activity) {
-        activityInjector.inject(activity)
+    override fun inject(activity: Activity): ActivityComponent {
+        return activityInjector.inject(activity)
     }
 }
