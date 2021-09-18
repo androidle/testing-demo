@@ -37,6 +37,9 @@ This project is to show the practice testing on android
      that from the codelab [android-dagger](https://developer.android.com/codelabs/android-dagger)
   2. Base on #1 graph above, this leads to a new issue on ui testing of how to handle dependency inject?
      The FragmentScenario can't be used directly.
+- [Hilt](https://developer.android.google.cn/training/dependency-injection/hilt-android)
+  [Dagger to Hilt](https://developer.android.com/codelabs/android-dagger-to-hilt)
+  [HiltDemo](https://github.com/googlecodelabs/android-hilt)    
 ## Plugins
 
 * Code coverage with [jacoco](https://github.com/jacoco/jacoco)

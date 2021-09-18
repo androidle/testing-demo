@@ -6,9 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.leevinapp.testingdemo.common.Resource
 import com.leevinapp.testingdemo.repository.UserDataRepository
 import com.leevinapp.testingdemo.repository.model.GithubRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(private val userDataRepository: UserDataRepository) :
     ViewModel() {
     private val _userDataResult: MutableLiveData<Resource<List<GithubRepo>>> = MutableLiveData()

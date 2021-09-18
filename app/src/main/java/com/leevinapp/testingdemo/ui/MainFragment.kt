@@ -7,10 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.common.Resource
-import com.leevinapp.testingdemo.common.ViewModelFactory
 import com.leevinapp.testingdemo.databinding.FragmentMainBinding
 import com.leevinapp.testingdemo.repository.model.GithubRepo
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,15 +21,12 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    @Inject
     lateinit var dialog: Dialog
 
     @Inject
     lateinit var resourcesGlobal: Resources
 
-    private val viewModel: MainViewModel by activityViewModels { viewModelFactory }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -11,13 +11,11 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.R
-import com.leevinapp.testingdemo.di.BaseUrlModule
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
 import com.leevinapp.testingdemo.utils.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import dagger.hilt.android.testing.UninstallModules
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -32,7 +30,6 @@ import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
 @HiltAndroidTest
-@UninstallModules(BaseUrlModule::class)
 @RunWith(AndroidJUnit4::class)
 class MainFragmentTest {
 
