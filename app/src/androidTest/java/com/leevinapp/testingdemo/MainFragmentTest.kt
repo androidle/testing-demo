@@ -1,8 +1,7 @@
 package com.leevinapp.testingdemo
 
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.lifecycle.Lifecycle
+import android.app.Activity
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -12,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.facebook.testing.screenshot.Screenshot
+import com.leevinapp.testingdemo.ui.MainActivity
 import com.leevinapp.testingdemo.ui.MainFragment
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
@@ -31,7 +31,8 @@ import java.util.concurrent.TimeUnit
 class MainFragmentTest {
 
     private val mockWebServer = MockWebServer()
-    private var activity: FragmentActivity? = null
+
+    private lateinit var activity: Activity
 
     @Before
     fun setup() {
@@ -53,7 +54,9 @@ class MainFragmentTest {
             }
         }
 
-        launchAndMoveToResume()
+        ActivityScenario.launch(MainActivity::class.java).onActivity {
+            this.activity = it
+        }
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(withId(R.id.textviewSuccess), isDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -70,7 +73,9 @@ class MainFragmentTest {
 
     @Test
     fun testLoadingBeforeResponseReturn() {
-        launchAndMoveToResume()
+        ActivityScenario.launch(MainActivity::class.java).onActivity {
+            this.activity = it
+        }
 
         Espresso.onView(withId(R.id.progress_bar))
             .check(matches(isDisplayed()))
@@ -94,7 +99,9 @@ class MainFragmentTest {
             }
         }
 
-        launchAndMoveToResume()
+        ActivityScenario.launch(MainActivity::class.java).onActivity {
+            this.activity = it
+        }
 
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isDisplayed())
 
@@ -123,7 +130,9 @@ class MainFragmentTest {
             }
         }
         // When
-        launchAndMoveToResume()
+        ActivityScenario.launch(MainActivity::class.java).onActivity {
+            this.activity = it
+        }
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.no_data_message)), isCompletelyDisplayed())
 
         // Then
@@ -143,13 +152,5 @@ class MainFragmentTest {
 
     fun loadLocalResponse(path: String): String {
         return ResourceFile(path).readText()
-    }
-
-    private fun launchAndMoveToResume() {
-        launchFragmentInContainer<MainFragment>(themeResId = R.style.AppTheme).moveToState(
-            Lifecycle.State.RESUMED
-        ).onFragment {
-            this.activity = it.activity
-        }
     }
 }

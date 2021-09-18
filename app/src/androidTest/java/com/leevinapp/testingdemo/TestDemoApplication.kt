@@ -4,5 +4,5 @@ import com.leevinapp.testingdemo.di.DaggerTestAppComponent
 import com.leevinapp.testingdemo.di.TestAppComponent
 
 class TestDemoApplication : DemoApplication() {
-    override val component: TestAppComponent = DaggerTestAppComponent.create()
+    override val component: TestAppComponent = DaggerTestAppComponent.factory().create(this)
 }
