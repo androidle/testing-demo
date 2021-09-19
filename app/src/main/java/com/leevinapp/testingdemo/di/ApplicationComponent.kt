@@ -4,10 +4,18 @@ import android.content.Context
 import com.leevinapp.testingdemo.DemoApplication
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class, BaseUrlModule::class])
+@Component(
+    modules = [
+        AndroidInjectionModule::class,
+        ApplicationModule::class,
+        BaseUrlModule::class,
+        BindActivityModule::class
+    ]
+)
 interface ApplicationComponent {
     // Factory to create instances of the ApplicationComponent
     @Component.Factory
@@ -17,6 +25,4 @@ interface ApplicationComponent {
     }
 
     fun inject(application: DemoApplication)
-
-    fun activityComponent(): ActivityComponent.Factory
 }
