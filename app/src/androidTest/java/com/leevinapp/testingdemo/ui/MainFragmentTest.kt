@@ -1,4 +1,4 @@
-package com.leevinapp.testingdemo
+package com.leevinapp.testingdemo.ui
 
 import android.app.Activity
 import androidx.test.core.app.ActivityScenario
@@ -11,10 +11,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.facebook.testing.screenshot.Screenshot
-import com.leevinapp.testingdemo.ui.MainActivity
+import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
-import java.util.concurrent.TimeUnit
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -25,6 +24,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class MainFragmentTest {

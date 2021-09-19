@@ -1,5 +1,6 @@
 package com.leevinapp.testingdemo.ui
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
+    @Inject
+    lateinit var dialog: Dialog
+
     private val viewModel: MainViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +34,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             val fragment = MainFragment.newInstance()
             replace(R.id.container, fragment, fragment::class.java.canonicalName)
         }
-        /**
-         * viewModelFactory is ActivityComponent graph, @Reusable to make sure the same instance
-         * and viewModels {} to have lifecycle to lifecycle owners
-         */
         Timber.e("=====viewModelFactory=====$viewModelFactory")
         Timber.e("=====viewModel=====$viewModel")
+        Timber.e("=====dialog=====$dialog")
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
