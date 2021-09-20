@@ -1,4 +1,4 @@
-package com.leevinapp.testingdemo
+package com.leevinapp.testingdemo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -2,9 +2,7 @@ package com.leevinapp.testingdemo.ui
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -14,11 +12,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.utils.ResourceFile
-import com.leevinapp.testingdemo.utils.withIndex
+import com.leevinapp.testingdemo.utils.ViewIdlingResource
+import com.leevinapp.testingdemo.utils.launchFragmentInDaggerContainer
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 import org.junit.After
 import org.junit.Before
@@ -28,9 +28,7 @@ import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class OtherFragmentTest {
-
     private val mockWebServer = MockWebServer()
-
     private lateinit var activity: FragmentActivity
 
     @Before
@@ -52,20 +50,21 @@ class OtherFragmentTest {
                     .setBody(loadLocalResponse("success_response.json"))
             }
         }
-
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        // Using launch in  how to decouple the otherFragment test
+        launchFragmentInDaggerContainer<OtherFragment> {
+            this@OtherFragmentTest.activity = activity!!
         }
-        // TODO: 2021/9/20 how to decouple the otherFragment test 
-        Espresso.onView(withId(R.id.buttonOther)).perform(click())
 
-//        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(withIndex(withId(R.id.textviewSuccess),1), isDisplayed())
+        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(
+            withId(R.id.textviewSuccess),
+            isDisplayed()
+        )
 
-        Espresso.onView(withIndex(withId(R.id.progress_bar), 1))
+        Espresso.onView(withId(R.id.progress_bar))
             .check(matches(not(isDisplayed())))
-        Espresso.onView(withIndex(withId(R.id.textviewSuccess), 1))
+        Espresso.onView(withId(R.id.textviewSuccess))
             .check(matches(isDisplayed()))
-        Espresso.onView(withIndex(withId(R.id.textview), 1))
+        Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
 
         Screenshot.snapActivity(activity)
@@ -75,19 +74,17 @@ class OtherFragmentTest {
 
     @Test
     fun testLoadingBeforeResponseReturn() {
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        launchFragmentInDaggerContainer<OtherFragment> {
+            this@OtherFragmentTest.activity = activity!!
         }
 
-        Espresso.onView(withId(R.id.buttonOther)).perform(click())
-
-        Espresso.onView(withIndex(withId(R.id.progress_bar), 1))
+        Espresso.onView(withId(R.id.progress_bar))
             .check(matches(isDisplayed()))
-        Espresso.onView(withIndex(withId(R.id.textviewSuccess), 1))
+        Espresso.onView(withId(R.id.textviewSuccess))
             .check(matches(not(isDisplayed())))
-        Espresso.onView(withIndex(withId(R.id.textview), 1))
+        Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
-        Espresso.onView(withIndex(withId(R.id.textview), 1))
+        Espresso.onView(withId(R.id.textview))
             .check(matches(not(isDisplayed())))
 
         Screenshot.snapActivity(activity)
@@ -103,20 +100,25 @@ class OtherFragmentTest {
             }
         }
 
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        launchFragmentInDaggerContainer<OtherFragment> {
+            this@OtherFragmentTest.activity = activity!!
         }
 
-        Espresso.onView(withId(R.id.buttonOther)).perform(click())
-//        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isDisplayed())
+        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(
+            allOf(
+                withId(R.id.textview),
+                withText(R.string.error_message)
+            ),
+            isDisplayed()
+        )
 
-        Espresso.onView(withIndex(withId(R.id.progress_bar), 1))
+        Espresso.onView(withId(R.id.progress_bar))
             .check(matches(not(isDisplayed())))
-        Espresso.onView(withIndex(withId(R.id.textviewSuccess), 1))
+        Espresso.onView(withId(R.id.textviewSuccess))
             .check(matches(not(isDisplayed())))
-        Espresso.onView(withIndex(withId(R.id.textview), 1))
+        Espresso.onView(withId(R.id.textview))
             .check(matches(isDisplayed()))
-        Espresso.onView(withIndex(withId(R.id.textview), 1))
+        Espresso.onView(withId(R.id.textview))
             .check(matches(withText(R.string.error_message)))
 
         Screenshot.snapActivity(activity)
@@ -135,21 +137,25 @@ class OtherFragmentTest {
             }
         }
         // When
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        launchFragmentInDaggerContainer<OtherFragment> {
+            this@OtherFragmentTest.activity = activity!!
         }
 
-        Espresso.onView(withId(R.id.buttonOther)).perform(click())
-//        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.no_data_message)), isCompletelyDisplayed())
-
+        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(
+            allOf(
+                withId(R.id.textview),
+                withText(R.string.no_data_message)
+            ),
+            isDisplayed()
+        )
         // Then
-        Espresso.onView(withIndex(withId(R.id.progress_bar), 1))
+        Espresso.onView(withId(R.id.progress_bar))
             .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
-        Espresso.onView(withIndex(withId(R.id.textviewSuccess), 1))
+        Espresso.onView(withId(R.id.textviewSuccess))
             .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.GONE)))
-        Espresso.onView(withIndex(withId(R.id.textview), 1))
+        Espresso.onView(withId(R.id.textview))
             .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
-        Espresso.onView(withIndex(withId(R.id.textview), 1))
+        Espresso.onView(withId(R.id.textview))
             .check(matches(withText(R.string.no_data_message)))
 
         Screenshot.snapActivity(activity)

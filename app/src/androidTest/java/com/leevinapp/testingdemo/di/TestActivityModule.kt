@@ -2,8 +2,8 @@ package com.leevinapp.testingdemo.di
 
 import android.app.AlertDialog
 import android.app.Dialog
-import com.leevinapp.testingdemo.TestActivity
 import com.leevinapp.testingdemo.di.scope.ActivityScope
+import com.leevinapp.testingdemo.ui.TestActivity
 import dagger.Module
 import dagger.Provides
 

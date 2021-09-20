@@ -2,18 +2,17 @@ package com.leevinapp.testingdemo
 
 import android.app.Application
 import com.leevinapp.testingdemo.di.ApplicationComponent
-import com.leevinapp.testingdemo.di.ApplicationComponentProvider
 import com.leevinapp.testingdemo.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-open class DemoApplication : Application(), ApplicationComponentProvider, HasAndroidInjector {
+open class DemoApplication : Application(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    override val component: ApplicationComponent by lazy {
+    open val component: ApplicationComponent by lazy {
         DaggerApplicationComponent.factory().create(applicationContext)
     }
 

@@ -4,4 +4,9 @@
 
     <!-- screenshots needs   -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <application>
+        <activity
+            android:name=".ui.TestActivity"
+            android:screenOrientation="portrait" />
+    </application>
 </manifest>

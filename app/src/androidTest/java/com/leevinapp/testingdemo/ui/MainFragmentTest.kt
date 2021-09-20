@@ -1,6 +1,5 @@
 package com.leevinapp.testingdemo.ui
 
-import android.app.Activity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.test.core.app.ActivityScenario
@@ -16,6 +15,7 @@ import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
+import com.leevinapp.testingdemo.utils.launchFragmentInDaggerContainer
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -33,7 +33,7 @@ class MainFragmentTest {
 
     private val mockWebServer = MockWebServer()
 
-    private lateinit var activity: Activity
+    private lateinit var activity: FragmentActivity
 
     @Before
     fun setup() {
@@ -55,9 +55,10 @@ class MainFragmentTest {
             }
         }
 
-        ActivityScenario.launch(MainActivity::class.java).onActivity {
-            this.activity = it
+        launchFragmentInDaggerContainer<MainFragment> {
+            this@MainFragmentTest.activity = activity!!
         }
+
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(withId(R.id.textviewSuccess), isDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))

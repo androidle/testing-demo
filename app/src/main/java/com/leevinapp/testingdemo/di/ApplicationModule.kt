@@ -56,8 +56,5 @@ class ApplicationModule {
     }
 
     @Provides
-    fun providerApplicationComponentProvider(context: Context) = context as ApplicationComponentProvider
-
-    @Provides
     fun providerResources(context: Context): Resources = context.resources
 }

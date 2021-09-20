@@ -12,7 +12,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ApplicationModule::class,
         TestBaseUrlModule::class,
-        BindActivityModule::class
+        TestBindActivityModule::class
     ]
 )
 interface TestAppComponent : ApplicationComponent {
