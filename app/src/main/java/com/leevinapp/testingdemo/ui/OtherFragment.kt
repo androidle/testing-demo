@@ -6,21 +6,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.common.Resource
 import com.leevinapp.testingdemo.common.ViewModelFactory
-import com.leevinapp.testingdemo.databinding.FragmentMainBinding
+import com.leevinapp.testingdemo.databinding.FragmentOtherBinding
 import com.leevinapp.testingdemo.repository.model.GithubRepo
 import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.DaggerFragment
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainFragment : DaggerFragment() {
+class OtherFragment : Fragment() {
 
-    private lateinit var binding: FragmentMainBinding
+    private lateinit var binding: FragmentOtherBinding
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -30,12 +30,8 @@ class MainFragment : DaggerFragment() {
     private val viewModel: MainViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
-        super.onAttach(context)
-        /**
-         * compile error for params required fragment that is not from androidx libs when using AndroidSupportInjection
-         * Fixed by AndroidSupportInjection has migrate to androidx need implement dagger-android-support
-         */
         AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(
@@ -43,7 +39,7 @@ class MainFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentOtherBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -104,6 +100,6 @@ class MainFragment : DaggerFragment() {
     }
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = OtherFragment()
     }
 }

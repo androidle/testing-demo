@@ -54,6 +54,14 @@ class MainFragment : DaggerFragment() {
         Timber.e("=====viewModelFactory=====$viewModelFactory")
         Timber.e("=====viewModel=====$viewModel")
         Timber.e("=====dialog=====$dialog")
+        // todo should navigation via activity
+        binding.buttonOther.setOnClickListener {
+            activity?.apply {
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.container, OtherFragment.newInstance(), OtherFragment::class.java.canonicalName)
+                    .commit()
+            }
+        }
     }
 
     private fun initData() {

@@ -48,4 +48,11 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="There seems to be no data" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonOther"
+        android:layout_width="match_parent"
+        android:text="Open other"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
