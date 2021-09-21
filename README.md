@@ -55,6 +55,4 @@ This project is to show the practice testing on android
        to [maven-publish-gradle](https://gist.github.com/Robyer/a6578e60127418b380ca133a1291f017)
 
 * Code style with [ktlint](https://ktlint.github.io/)
-  
-
 
