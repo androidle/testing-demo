@@ -124,5 +124,6 @@ dependencies {
 
 screenshots {
     recordDir = "../screenshotTest"
+    // API 26 Nexus_5X
     multipleDevices false
 }

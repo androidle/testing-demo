@@ -1,4 +1,4 @@
-package com.leevinapp.testingdemo
+package com.leevinapp.testingdemo.ui
 
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -12,7 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.facebook.testing.screenshot.Screenshot
-import com.leevinapp.testingdemo.ui.MainFragment
+import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
 import okhttp3.mockwebserver.Dispatcher
