@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.leevinapp.testingdemo.DemoApplication
 import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.common.Resource
@@ -50,7 +49,7 @@ class MainFragment : Fragment() {
     private fun observerViewModel() {
         viewModel.userDataResult.observe(
             viewLifecycleOwner,
-            Observer { result ->
+            { result ->
                 when (result) {
                     is Resource.Success -> {
                         if (result.data.isNotEmpty()) {

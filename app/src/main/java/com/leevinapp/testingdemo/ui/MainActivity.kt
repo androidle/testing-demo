@@ -4,15 +4,20 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.leevinapp.testingdemo.R
+import com.leevinapp.testingdemo.common.LoadingPresenter
+import com.leevinapp.testingdemo.databinding.ActivitySingleFragmentBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySingleFragmentBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_single_fragment)
-        supportFragmentManager.commit {
-            val fragment = MainFragment.newInstance()
-            replace(R.id.container, fragment, fragment::class.java.canonicalName)
+        binding = ActivitySingleFragmentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val loadingPresenter = LoadingPresenter(this)
+        binding.loadingButton.setOnClickListener {
+            loadingPresenter.showLoading()
         }
     }
 }
