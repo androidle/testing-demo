@@ -3,4 +3,9 @@
     <string name="no_data_message">There seems to be no data :(</string>
     <string name="error_message">Something went wrong</string>
     <string name="loading">loading</string>
+
+    <string name="theme_default">default</string>
+    <string name="theme_1">theme 1</string>
+    <string name="theme_2">theme 2</string>
+    <string name="theme_3">theme 3</string>
 </resources>
