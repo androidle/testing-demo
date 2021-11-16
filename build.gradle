@@ -6,7 +6,7 @@ buildscript {
         screenshotTestVersion = "0.14.0"
         jacocoVersion = "0.8.7"
         sonarqubeVersion = "3.0"
-        hiltVersion = '2.38.1'
+        hiltVersion = '2.40'
     }
     repositories {
         google()

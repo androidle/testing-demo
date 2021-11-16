@@ -11,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.R
+import com.leevinapp.testingdemo.utils.InstrumentationTestRule
 import com.leevinapp.testingdemo.utils.ResourceFile
 import com.leevinapp.testingdemo.utils.ViewIdlingResource
 import com.leevinapp.testingdemo.utils.launchFragmentInHiltContainer
@@ -36,19 +37,12 @@ class MainFragmentTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
-    private val mockWebServer = MockWebServer()
+    @get:Rule
+    var instrumentationTestRule = InstrumentationTestRule()
+
+    private val mockWebServer = instrumentationTestRule.server
 
     private lateinit var testActivity: Activity
-
-    @Before
-    fun setup() {
-        mockWebServer.start(8000)
-    }
-
-    @After
-    fun tearDown() {
-        mockWebServer.shutdown()
-    }
 
     @Test
     fun testSuccessfulResponse() {
@@ -101,14 +95,14 @@ class MainFragmentTest {
     fun testFailedResponse() {
         mockWebServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
-                return MockResponse().throttleBody(1024, 5, TimeUnit.SECONDS)
+                return MockResponse().throttleBody(1024, 10, TimeUnit.SECONDS)
             }
         }
 
         launchFragmentInHiltContainer<MainFragment> {
             testActivity = this.requireActivity()
         }
-
+        Thread.sleep(2_000)
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -139,6 +133,7 @@ class MainFragmentTest {
         launchFragmentInHiltContainer<MainFragment> {
             testActivity = this.requireActivity()
         }
+        Thread.sleep(2_000)
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.no_data_message)), isCompletelyDisplayed())
 
         // Then

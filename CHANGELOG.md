@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add UI testing with MockWebserver
 - Add 2 ways of fragment testing with MockWebserver
 ### Changed
--
+- Change mock web server using https
 ### Fixed
 -
 ### Removed

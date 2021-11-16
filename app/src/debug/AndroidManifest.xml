@@ -5,7 +5,8 @@
     <!-- screenshots needs   -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <application>
+    <application
+        android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name=".ui.HiltTestActivity"
             android:exported="false"  />

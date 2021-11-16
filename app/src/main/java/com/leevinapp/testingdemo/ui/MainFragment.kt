@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.leevinapp.journeylib.JourneyFeature
 import com.leevinapp.testingdemo.R
 import com.leevinapp.testingdemo.common.Resource
 import com.leevinapp.testingdemo.databinding.FragmentMainBinding

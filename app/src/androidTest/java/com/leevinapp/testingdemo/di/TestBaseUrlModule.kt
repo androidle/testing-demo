@@ -15,6 +15,6 @@ class TestBaseUrlModule {
     @Singleton
     @Provides
     fun providerBaseUrl(): String {
-        return "http://localhost:8000"
+        return "https://localhost:8000"
     }
 }

@@ -12,6 +12,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -31,6 +32,7 @@ class ApplicationModule {
             .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
             .addLoggingInterceptor()
+            .connectionSpecs(listOf(ConnectionSpec.MODERN_TLS))
             .build()
     }
 
