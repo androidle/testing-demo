@@ -2,6 +2,14 @@
 
 # Testing Demo
 
+## Samples - Kotlin
+|     Sample     | Description |
+| ------------- | ------------- |
+| [master](https://github.com/androidle/testing-demo/tree/main) | The base for the rest of the branches.<br/>Uses MockWebServer |
+| [dagger-android](https://github.com/androidle/testing-demo/tree/dagger-android) | A simple Dagger setup that uses `dagger-android`|
+| [hilt](https://github.com/androidle/testing-demo/tree/hilt) | A simple  `hilt` setup |
+| [mockWebServer_https_base_hilt](https://github.com/androidle/testing-demo/tree/mockWebServer_https) | A simple MockWebServer `https` setup |
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -9,6 +17,7 @@
 - [Demo](#demo)
 - [Libraries](#Libraries)
 - [Plugins](#Plugins)
+- [Others](#Others)
 
 ## Introduction
 
@@ -16,6 +25,8 @@ This project is to show the practice testing on android
 
 ## Testing
 
+* Testing app on Android [Google training](https://developer.android.com/training/testing)
+* Unit testing refers [javaJunitExamples](http://www.javabyexamples.com/tag/junit)
 * Instrumentation testing
   with [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
 * Screenshot testing
@@ -56,3 +67,9 @@ This project is to show the practice testing on android
 
 * Code style with [ktlint](https://ktlint.github.io/)
 
+## Others
+
+### theme
+
+- [android themes and styles](https://developer.android.com/guide/topics/ui/look-and-feel/themes)
+- [Android Styling: Common Theme Attributes](https://medium.com/androiddevelopers/android-styling-common-theme-attributes-8f7c50c9eaba)

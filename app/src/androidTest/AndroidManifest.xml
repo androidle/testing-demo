@@ -7,8 +7,5 @@
         android:name=".TestDemoApplication"
         android:label="TestDemoApp"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".SingleFragmentActivity"
-            android:screenOrientation="portrait" />
     </application>
 </manifest>
