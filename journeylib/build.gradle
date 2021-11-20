@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.sonarqube'
 apply plugin: 'maven-publish'
-apply from: '../jacoco.gradle'
+//apply from: '../jacoco.gradle'
 apply from: '../ktlint.gradle'
 
 android {
@@ -11,8 +11,6 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 1
-        versionName "3.0-SNAPSHOT"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -92,7 +90,7 @@ afterEvaluate {
                 // change to point to your repo
                 def releasesRepoUrl = layout.projectDirectory.dir('repos/releases')
                 def snapshotsRepoUrl = layout.projectDirectory.dir('repos/snapshots')
-                println version = publications.release.version
+                // version = publications.release.version
                 url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             }
         }

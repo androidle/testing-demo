@@ -3,6 +3,24 @@ apply plugin: 'jacoco'
  * The correct path of the report is $rootProjectDir/app/build/reports/jacoco/index.html
  * to run this task use: ./gradlew clean jacocoTestReport
  */
+
+// Refer from https://youtrack.jetbrains.com/issue/KT-44757#focus=Comments-27-5247441.0-0
+// The issue Gradle version: 7.0.2, Kotlin: 1.5.30. Jacoco: 0.8.7 Just applying the jacoco version might not always work.
+jacoco {
+    toolVersion = rootProject.jacocoVersion
+}
+
+// Use the resolution strategy along with the version in the app.gradle. It will fix the issue.
+configurations.all{
+    resolutionStrategy {
+        eachDependency { details ->
+            if ('org.jacoco' == details.requested.group) {
+                details.useVersion rootProject.jacocoVersion
+            }
+        }
+    }
+}
+
 def fileFilter = [
         //Classes I intentionally don't want to test
         '**/*Application.*',

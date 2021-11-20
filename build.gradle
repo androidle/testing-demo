@@ -2,7 +2,7 @@
 buildscript {
     ext {
         kotlinVersion = "1.5.31"
-        androidGradlePluginVersion = "4.1.1"
+        androidGradlePluginVersion = '7.0.3'
         screenshotTestVersion = "0.14.0"
         jacocoVersion = "0.8.7"
         sonarqubeVersion = "3.0"
