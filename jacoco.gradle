@@ -3,6 +3,10 @@ apply plugin: 'jacoco'
  * The correct path of the report is $rootProjectDir/app/build/reports/jacoco/index.html
  * to run this task use: ./gradlew clean jacocoTestReport
  */
+jacoco {
+    toolVersion = rootProject.jacocoVersion
+}
+
 def fileFilter = [
         //Classes I intentionally don't want to test
         '**/*Application.*',
