@@ -5,6 +5,8 @@ apply plugin: 'jacoco'
  */
 def fileFilter = [
         //Classes I intentionally don't want to test
+        '**/*test*/**',
+        '**/*androidTest*/**',
         '**/*Application.*',
         '**/*Activity**',
         '**/BuildConfig.*',

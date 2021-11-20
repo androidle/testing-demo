@@ -5,7 +5,7 @@ import okhttp3.tls.HandshakeCertificates
 import okhttp3.tls.HeldCertificate
 import org.junit.rules.ExternalResource
 
-class InstrumentationTestRule : ExternalResource() {
+class HttpsMockServerTestRule : ExternalResource() {
 
     val server = MockWebServer()
 

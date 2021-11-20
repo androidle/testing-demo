@@ -11,10 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.facebook.testing.screenshot.Screenshot
 import com.leevinapp.testingdemo.R
-import com.leevinapp.testingdemo.utils.InstrumentationTestRule
-import com.leevinapp.testingdemo.utils.ResourceFile
-import com.leevinapp.testingdemo.utils.ViewIdlingResource
-import com.leevinapp.testingdemo.utils.launchFragmentInHiltContainer
+import com.leevinapp.testingdemo.utils.*
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import okhttp3.mockwebserver.Dispatcher
@@ -38,7 +35,7 @@ class MainFragmentTest {
     var hiltRule = HiltAndroidRule(this)
 
     @get:Rule
-    var instrumentationTestRule = InstrumentationTestRule()
+    var instrumentationTestRule = HttpsMockServerTestRule()
 
     private val mockWebServer = instrumentationTestRule.server
 
