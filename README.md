@@ -17,10 +17,10 @@ This project is to show the practice testing on android
 
 ## Testing
 
-* Instrumentation testing
-  with [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
+* Instrumentation testing with [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
     * How to start [mockwebserver-https](https://adambennett.dev/2021/09/mockwebserver-https/)
-    * Google doc about [android-network-security-config](https://developer.android.com/codelabs/android-network-security-config)
+    * Test using a local HTTP server [http-server](https://github.com/http-party/http-server)
+    * Google code labs[android-network-security-config](https://developer.android.com/codelabs/android-network-security-config)
     * others [HTTPS_TLS](https://www.mock-server.com/mock_server/HTTPS_TLS.html)
     * local-https-development[ssl-certificate-authority](https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/)
 * Screenshot testing
