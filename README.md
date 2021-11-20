@@ -2,6 +2,14 @@
 
 # Testing Demo
 
+## Samples - Kotlin
+|     Sample     | Description |
+| ------------- | ------------- |
+| [master](https://github.com/androidle/testing-demo/tree/main) | The base for the rest of the branches.<br/>Uses MockWebServer |
+| [dagger-android](https://github.com/androidle/testing-demo/tree/dagger-android) | A simple Dagger setup that uses `dagger-android`|
+| [hilt](https://github.com/androidle/testing-demo/tree/hilt) | A simple  `hilt` setup |
+| [mockWebServer_https_base_hilt](https://github.com/androidle/testing-demo/tree/mockWebServer_https) | A simple MockWebServer `https` setup |
+
 ## Table of Contents
 
 - [Introduction](#introduction)
