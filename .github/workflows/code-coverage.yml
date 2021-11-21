@@ -19,7 +19,8 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
-            java-version: 1.8
+            distribution: 'temurin'
+            java-version: '11'
 
       - name: Generate Coverage Report
         uses: gradle/gradle-build-action@v2
