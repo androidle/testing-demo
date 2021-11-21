@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.IdlingPolicies
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed
@@ -36,6 +37,7 @@ class MainFragmentTest {
     @Before
     fun setup() {
         mockWebServer.start(8000)
+        IdlingPolicies.setIdlingResourceTimeout(3, TimeUnit.MINUTES)
     }
 
     @After
@@ -54,8 +56,7 @@ class MainFragmentTest {
         }
 
         launchAndMoveToResume()
-        Thread.sleep(1_000)
-        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(withId(R.id.textviewSuccess), isDisplayed())
+        ViewIdlingResource.waitUntilViewIsDisplayed(withId(R.id.textviewSuccess))
 
         Espresso.onView(withId(R.id.progress_bar))
             .check(matches(not(isDisplayed())))
@@ -96,8 +97,7 @@ class MainFragmentTest {
         }
 
         launchAndMoveToResume()
-        Thread.sleep(1_000)
-        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isDisplayed())
+        ViewIdlingResource.waitUntilViewIsDisplayed(allOf(withId(R.id.textview), withText(R.string.error_message)))
 
         Espresso.onView(withId(R.id.progress_bar))
             .check(matches(not(isDisplayed())))
@@ -125,8 +125,7 @@ class MainFragmentTest {
         }
         // When
         launchAndMoveToResume()
-        Thread.sleep(1_000)
-        ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.no_data_message)), isCompletelyDisplayed())
+        ViewIdlingResource.waitUntilViewIsDisplayed(allOf(withId(R.id.textview), withText(R.string.no_data_message)))
 
         // Then
         Espresso.onView(withId(R.id.progress_bar))
