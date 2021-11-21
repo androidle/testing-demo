@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.leevinapp.journeylib", appContext.packageName)
+        assertEquals("com.leevinapp.journeylib.test", appContext.packageName)
     }
 }

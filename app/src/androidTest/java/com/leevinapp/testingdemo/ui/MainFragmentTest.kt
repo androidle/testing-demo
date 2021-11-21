@@ -54,6 +54,7 @@ class MainFragmentTest {
         }
 
         launchAndMoveToResume()
+        Thread.sleep(1_000)
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(withId(R.id.textviewSuccess), isDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -95,7 +96,7 @@ class MainFragmentTest {
         }
 
         launchAndMoveToResume()
-
+        Thread.sleep(1_000)
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.error_message)), isDisplayed())
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -124,6 +125,7 @@ class MainFragmentTest {
         }
         // When
         launchAndMoveToResume()
+        Thread.sleep(1_000)
         ViewIdlingResource.waitUntilIdleMatcherIsFulfilled(allOf(withId(R.id.textview), withText(R.string.no_data_message)), isCompletelyDisplayed())
 
         // Then
