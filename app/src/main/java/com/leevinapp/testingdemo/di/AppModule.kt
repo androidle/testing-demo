@@ -3,7 +3,6 @@ package com.leevinapp.testingdemo.di
 import com.google.gson.GsonBuilder
 import com.leevinapp.testingdemo.addLoggingInterceptor
 import com.leevinapp.testingdemo.data.GithubApiService
-import com.leevinapp.testingdemo.data.UserDataRepositoryImpl
 import com.leevinapp.testingdemo.repository.UserDataRepository
 import dagger.Module
 import dagger.Provides
@@ -50,6 +49,6 @@ class AppModule {
     @Singleton
     @Provides
     fun providerUserDataRepository(githubApiService: GithubApiService): UserDataRepository {
-        return UserDataRepositoryImpl(githubApiService)
+        return UserDataRepository(githubApiService)
     }
 }

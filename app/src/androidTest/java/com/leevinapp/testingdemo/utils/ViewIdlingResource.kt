@@ -6,6 +6,7 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.ViewFinder
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import org.hamcrest.Matcher
 
@@ -33,15 +34,15 @@ class ViewIdlingResource(
     }
 
     companion object {
-        private fun getView(viewMatcher: Matcher<View>): View {
-            try {
+        private fun getView(viewMatcher: Matcher<View>): View? {
+            return try {
                 val viewInteraction = onView(viewMatcher)
                 val finderField = viewInteraction.javaClass.getDeclaredField("viewFinder")
                 finderField.isAccessible = true
                 val viewfinder = finderField.get(viewInteraction) as ViewFinder
-                return viewfinder.view
+                viewfinder.view
             } catch (e: Exception) {
-                throw RuntimeException()
+                null
             }
         }
 
@@ -57,6 +58,10 @@ class ViewIdlingResource(
             } finally {
                 IdlingRegistry.getInstance().unregister(idlingResource)
             }
+        }
+
+        fun waitUntilViewIsDisplayed(matcher: Matcher<View>) {
+            waitUntilIdleMatcherIsFulfilled(viewMatcher = matcher, isDisplayed())
         }
     }
 }
