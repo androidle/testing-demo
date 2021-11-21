@@ -59,7 +59,6 @@ class MainViewModelTest {
             GithubRepo(
                 archive_url = "https://api.github.com/repos/list/yiitutorial/{archive_format}{/ref}",
                 archived = false,
-                clone_url = "https://github.com/list/yiitutorial.git",
                 assignees_url = null,
                 blobs_url = null,
                 branches_url = "https://api.github.com/repos/list/yiitutorial/branches{/branch}"

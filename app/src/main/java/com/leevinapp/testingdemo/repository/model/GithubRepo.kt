@@ -6,5 +6,4 @@ data class GithubRepo(
     val assignees_url: String?,
     val blobs_url: String?,
     val branches_url: String?,
-    val clone_url: String?
 )
