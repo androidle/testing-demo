@@ -1,5 +1,5 @@
 [![Platform](https://img.shields.io/badge/platform-android-brightgreen)](https://developer.android.com/reference)
-
+[![codecov](https://codecov.io/gh/androidle/testing-demo/branch/main/graph/badge.svg?token=P3QA72T8FB)](https://codecov.io/gh/androidle/testing-demo)
 # Testing Demo
 
 ## Samples - Kotlin
