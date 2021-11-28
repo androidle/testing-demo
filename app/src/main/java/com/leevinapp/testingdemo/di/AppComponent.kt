@@ -19,5 +19,4 @@ interface AppComponent {
     }
 
     fun inject(fragment: MainFragment)
-    fun inject(activity: MainActivity)
 }

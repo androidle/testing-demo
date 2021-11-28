@@ -8,17 +8,6 @@ apply from: '../ktlint.gradle'
 android {
     compileSdkVersion 30
 
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-            returnDefaultValues = true
-        }
-
-        testOptions {
-            execution 'ANDROIDX_TEST_ORCHESTRATOR'
-        }
-    }
-
     defaultConfig {
         applicationId "com.leevinapp.testingdemo"
         minSdkVersion 23
@@ -52,8 +41,17 @@ android {
         viewBinding true
     }
 
-    testOptions.unitTests {
-        includeAndroidResources = true
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
+
+        testOptions {
+            execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        }
+
+        animationsDisabled = true
     }
 }
 
