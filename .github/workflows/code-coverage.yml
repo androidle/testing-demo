@@ -1,0 +1,32 @@
+name: Code Coverage
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  publish-code-coverage:
+    if: ${{ !contains(github.event.head_commit.message, 'coverage skip') }}
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+            distribution: 'temurin'
+            java-version: '11'
+
+      - name: Generate Coverage Report
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: jacocoTestReport
+
+      - name: Publish Coverage
+        if: success()
+        uses: codecov/codecov-action@v2
