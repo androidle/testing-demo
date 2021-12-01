@@ -21,6 +21,7 @@ sonarqube {
     properties {
         property "sonar.projectKey", "leevin-demo"
         property "sonar.projectName", "testing-demo"
+        property "sonar.organization", "leevin-demo"
         property 'sonar.host.url', 'https://sonarcloud.io'
         property 'sonar.login', 'c23513cdeaf0e4204f5f52fbe9b15bd66131f727'
 
