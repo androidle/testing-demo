@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'org.sonarqube'
+//apply plugin: 'org.sonarqube'
 apply plugin: 'maven-publish'
 apply from: '../jacoco.gradle'
 apply from: '../ktlint.gradle'
@@ -41,31 +41,31 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
-sonarqube {
-    properties {
-        property 'sonar.projectName', 'testing-demo'
-        property 'sonar.projectKey', 'testing-demo'
-        property 'sonar.host.url', 'http://localhost:9000'
-        property 'sonar.login', 'admin'
-        property 'sonar.password', 'admin'
-
-        property 'sonar.sources', 'src/main/java'
-        property 'sonar.sourcesEncoding', 'UTF-8'
-
-        property 'sonar.java.binaries', 'build/intermediates/javac'
-        property 'sonar.kotlin.binaries', 'build/tmp/kotlin-classes'
-
-        property 'sonar.java.coveragePlugin', 'jacoco'
-        property 'sonar.kotlin.coveragePlugin', 'jacoco'
-
-        property 'sonar.tests', ['src/test/java', 'src/androidTest/java']
-        property 'sonar.junit.reportsPath', 'build/reports/tests'
-        property 'sonar.jacoco.reportsPath', 'build/reports/tests'
-        property 'sonar.coverage.jacoco.xmlReportsPaths', 'build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
-
-        property 'sonar.androidLint.reportPaths', 'build/reports/lint-results.xml'
-    }
-}
+//sonarqube {
+//    properties {
+//        property 'sonar.projectName', 'testing-demo'
+//        property 'sonar.projectKey', 'testing-demo'
+//        property 'sonar.host.url', 'http://localhost:9000'
+//        property 'sonar.login', 'admin'
+//        property 'sonar.password', 'admin'
+//
+//        property 'sonar.sources', 'src/main/java'
+//        property 'sonar.sourcesEncoding', 'UTF-8'
+//
+//        property 'sonar.java.binaries', 'build/intermediates/javac'
+//        property 'sonar.kotlin.binaries', 'build/tmp/kotlin-classes'
+//
+//        property 'sonar.java.coveragePlugin', 'jacoco'
+//        property 'sonar.kotlin.coveragePlugin', 'jacoco'
+//
+//        property 'sonar.tests', ['src/test/java', 'src/androidTest/java']
+//        property 'sonar.junit.reportsPath', 'build/reports/tests'
+//        property 'sonar.jacoco.reportsPath', 'build/reports/tests'
+//        property 'sonar.coverage.jacoco.xmlReportsPaths', 'build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+//
+//        property 'sonar.androidLint.reportPaths', 'build/reports/lint-results.xml'
+//    }
+//}
 
 task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs

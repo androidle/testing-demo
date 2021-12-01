@@ -4,6 +4,7 @@ apply plugin: 'com.facebook.testing.screenshot'
 apply plugin: 'kotlin-kapt'
 apply from: '../jacoco.gradle'
 apply from: '../ktlint.gradle'
+apply from: '../sonarqube.gradle'
 
 android {
     compileSdkVersion 30
@@ -42,16 +43,13 @@ android {
     }
 
     testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled = true
+
         unitTests {
             includeAndroidResources = true
             returnDefaultValues = true
         }
-
-        testOptions {
-            execution 'ANDROIDX_TEST_ORCHESTRATOR'
-        }
-
-        animationsDisabled = true
     }
 }
 
