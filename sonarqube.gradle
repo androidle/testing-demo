@@ -1,10 +1,34 @@
 apply plugin: "org.sonarqube"
 
+//sonarqube {
+//    properties {
+//        property "sonar.host.url", "http://localhost:9000/"
+//        property "sonar.projectKey", "android-sample-app"
+//        property "sonar.projectName", "android-sample-app"
+//        property "sonar.login", "admin"
+//        property 'sonar.password', 'admin'
+//        property "sonar.tests", "src/test/java"
+//        property "sonar.test.inclusions", "**/*Test*/**"
+//        property "sonar.sourceEncoding", "UTF-8"
+//        property "sonar.sources", "src/main/java"
+//        property "sonar.java.coveragePlugin", "jacoco"
+//        property "sonar.junit.reportPaths", "**/test-results/**/*.xml"
+//        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+//    }
+//}
+
 sonarqube {
     properties {
         property "sonar.projectKey", "leevin-demo"
         property "sonar.projectName", "testing-demo"
         property 'sonar.host.url', 'https://sonarcloud.io'
         property 'sonar.login', 'c23513cdeaf0e4204f5f52fbe9b15bd66131f727'
+
+        property "sonar.tests", "src/test/java"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.sources", "src/main/java"
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.junit.reportPaths", "**/test-results/**/*.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
     }
 }
