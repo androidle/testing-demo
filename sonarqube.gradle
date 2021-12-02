@@ -19,7 +19,7 @@ apply plugin: "org.sonarqube"
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "leevin-demo"
+        property "sonar.projectKey", "testing-demo"
         property "sonar.projectName", "testing-demo"
         property "sonar.organization", "leevin-demo"
         property 'sonar.host.url', 'https://sonarcloud.io'
