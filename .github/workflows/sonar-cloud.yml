@@ -15,4 +15,4 @@ jobs:
       - name: Sonarqube scan
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: :app:jacocoTestReport :app:sonarqube -Dsonar.branch.name=main
+          arguments: :app:jacocoTestReport :app:sonarqube
