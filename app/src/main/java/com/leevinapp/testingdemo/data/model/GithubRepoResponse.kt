@@ -11,11 +11,11 @@ data class GithubRepoResponse(
 ) {
     fun toModel(): GithubRepo {
         return GithubRepo(
-            archive_url = this.archive_url,
+            archiveUrl = this.archive_url,
             archived = this.archived,
-            assignees_url = this.assignees_url,
-            blobs_url = this.blobs_url,
-            branches_url = this.branches_url
+            assigneesUrl = this.assignees_url,
+            blobsUrl = this.blobs_url,
+            branchesUrl = this.branches_url
         )
     }
 }

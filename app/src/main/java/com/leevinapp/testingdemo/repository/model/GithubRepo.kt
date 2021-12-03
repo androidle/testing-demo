@@ -1,9 +1,9 @@
 package com.leevinapp.testingdemo.repository.model
 
 data class GithubRepo(
-    val archive_url: String?,
+    val archiveUrl: String?,
     val archived: Boolean?,
-    val assignees_url: String?,
-    val blobs_url: String?,
-    val branches_url: String?,
+    val assigneesUrl: String?,
+    val blobsUrl: String?,
+    val branchesUrl: String?,
 )

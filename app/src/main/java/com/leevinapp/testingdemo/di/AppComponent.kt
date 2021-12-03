@@ -1,7 +1,6 @@
 package com.leevinapp.testingdemo.di
 
 import android.content.Context
-import com.leevinapp.testingdemo.ui.MainActivity
 import com.leevinapp.testingdemo.ui.MainFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -19,5 +18,4 @@ interface AppComponent {
     }
 
     fun inject(fragment: MainFragment)
-    fun inject(activity: MainActivity)
 }

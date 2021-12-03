@@ -43,7 +43,7 @@ class UserDataRepositoryTest {
             // Then
             coVerify { apiService.testFetch() }
             assert(result.size == givenResponse.size)
-            assert(result.first().archive_url == givenResponse.first().archive_url)
+            assert(result.first().archiveUrl == givenResponse.first().archive_url)
         }
     }
 }

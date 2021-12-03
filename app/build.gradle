@@ -4,20 +4,10 @@ apply plugin: 'com.facebook.testing.screenshot'
 apply plugin: 'kotlin-kapt'
 apply from: '../jacoco.gradle'
 apply from: '../ktlint.gradle'
+apply from: '../sonarqube.gradle'
 
 android {
     compileSdkVersion 30
-
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-            returnDefaultValues = true
-        }
-
-        testOptions {
-            execution 'ANDROIDX_TEST_ORCHESTRATOR'
-        }
-    }
 
     defaultConfig {
         applicationId "com.leevinapp.testingdemo"
@@ -52,8 +42,14 @@ android {
         viewBinding true
     }
 
-    testOptions.unitTests {
-        includeAndroidResources = true
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled = true
+
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
     }
 }
 

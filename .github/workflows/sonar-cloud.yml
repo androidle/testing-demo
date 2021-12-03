@@ -1,0 +1,18 @@
+name: Sonar
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Sonarqube scan
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: :app:jacocoTestReport :app:sonarqube
